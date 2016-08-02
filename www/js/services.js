@@ -1,18 +1,46 @@
 angular.module('starter.services', [])
 
-  // MockChats Service
-  .factory('Chats', function() {
-    // Some fake testing data
+  .factory('Chats', ['$http', function($http) {
+    var baseUri = 'https://facebook-for-cats-api.herokuapp.com/chats';
     var chats = [];
+    var cache = {};
 
-    return {
-      all: function() {
-        return chats;
-      },
-      remove: function(chat) {
-        chats.splice(chats.indexOf(chat), 1);
-      },
-      get: function(chatId) {
+    var getChats = function() {
+      if (chats.length > 0) {
+        return Promise.resolve(chats);
+      };
+
+      return $http
+        .get(baseUri)
+        .then(function(response) {
+          chats = response.data;
+
+          return chats;
+        });
+    };
+
+    var getChat = function(chatId) {
+      var getChatBody = function(chat) {
+        if (chat.id) {
+          if (cache[chat.id]) {
+            return Promise.resolve(cache[chat.id]);
+          };
+
+          var uri = [baseUri, chat.id].join('/');
+
+          return $http
+            .get(uri)
+            .then(function(response) {
+              cache[chat.id] = response.data;
+
+              return cache[chat.id];
+            });
+        };
+
+        return Promise.resolve(chat);
+      }
+
+      var locateChat = function(chats) {
         for (var i = 0; i < chats.length; i++) {
           if (chats[i].id === parseInt(chatId)) {
             return chats[i];
@@ -20,10 +48,19 @@ angular.module('starter.services', [])
         }
         return null;
       }
-    };
-  })
 
-  // MockNews Service
+      return getChats().then(locateChat).then(getChatBody);
+    }
+
+    return {
+      all: getChats,
+      remove: function(chat) {
+        return chats.splice(chats.indexOf(chat), 1);
+      },
+      get: getChat
+    };
+  }])
+
   .factory('News', ['$http', function($http) {
     var getNews = function() {
       return $http
