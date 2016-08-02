@@ -2,6 +2,11 @@
   "name": "catbook",
   "version": "1.1.1",
   "description": "Facebook for Cats",
+  "scripts": {
+    "dev": "./scripts/tmux-launch",
+    "setup": "npm i -G bower ionic cordova ios-sim ios-deploy",
+    "start": "npm i && bower i && ionic serve"
+  },
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^2.0.4",

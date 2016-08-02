@@ -1,0 +1,4 @@
+#!/bin/sh
+
+tmux new-session -ds 'catbook'
+tmux new-window -d -n 'server' 'npm start'
