@@ -2,3 +2,4 @@
 
 tmux new-session -ds 'catbook'
 tmux new-window -d -n 'server' 'npm start'
+tmux new-window -d -n 'styles' 'npm run style'

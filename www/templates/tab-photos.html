@@ -3,10 +3,10 @@
 
     <div class="catbook-photos">
 
-      <img class="catbook-photo"
-           ng-repeat="img in Photos.photos"
-           ng-src="{{ img.url }}"
-           alt="">
+      <div class="catbook-photo"
+           ng-repeat="img in Photos.photos">
+        <img ng-src="{{ img.url }}" alt="">
+      </div>
 
     </div>
 

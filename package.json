@@ -4,6 +4,7 @@
   "description": "Facebook for Cats",
   "scripts": {
     "dev": "./scripts/tmux-launch",
+    "style": "gulp watch",
     "setup": "npm i -G bower ionic cordova ios-sim ios-deploy",
     "start": "npm i && bower i && ionic serve"
   },

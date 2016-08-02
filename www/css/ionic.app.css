@@ -9814,3 +9814,15 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
+
+.catbook-photos, .catbook-photo {
+  display: flex;
+  padding: 1em; }
+
+.catbook-photos {
+  flex-wrap: wrap;
+  justify-content: space-around; }
+
+.catbook-photo {
+  align-items: center;
+  justify-content: center; }

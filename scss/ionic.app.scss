@@ -21,3 +21,17 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+.catbook-photos, .catbook-photo {
+  display: flex;
+  padding: 1em;
+}
+
+.catbook-photos {
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.catbook-photo {
+  align-items: center;
+  justify-content: center;
+}
