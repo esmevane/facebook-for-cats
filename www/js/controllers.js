@@ -1,9 +1,15 @@
 angular.module('starter.controllers', [])
 
-.controller('NewsCtrl', function(News) {
+.controller('NewsCtrl', function($scope, News) {
   var vm = this;
-  
-  vm.articles = News.getNews()
+
+  vm.articles = [];
+
+  News
+    .getNews()
+    .then(function(response) {
+      vm.articles = response.data;
+    });
 })
 
 .controller('ChatsCtrl', function($scope, Chats) {
@@ -17,10 +23,9 @@ angular.module('starter.controllers', [])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('PhotoCtrl', function(Photos) { 
-  
+.controller('PhotoCtrl', function($scope, Photos) {
   var vm = this;
-  
+
+  vm.photos = [];
   vm.photos = Photos.getPhotos();
-  
 });
