@@ -5,7 +5,7 @@
       <div class="item item-avatar">
         <img ng-src="{{ article.authorImg }}">
         <h2>{{ article.author }}</h2>
-        <p>{{ article.date }}</p>
+        <p>{{ article.date | date: 'fullDate' }}</p>
       </div>
 
       <div class="item item-body">
