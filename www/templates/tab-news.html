@@ -14,8 +14,25 @@
           {{ article.body }}
         </p>
         <p>
-          <a href="#" class="subdued">{{ article.likes }} Like</a>
-          <a href="#" class="subdued">{{ article.comments }} Comments</a>
+          <a href="#" class="subdued">
+            {{ article.likes }}
+            <ng-pluralize count="article.likes"
+                          when="{
+                            'one': 'Like',
+                            'other': 'Likes'
+                          }"
+            </ng-pluralize>
+          </a>
+
+          <a href="#" class="subdued">
+            {{ article.comments }}
+            <ng-pluralize count="article.comments"
+                          when="{
+                            'one': 'Comment',
+                            'other': 'Comments'
+                          }"
+            </ng-pluralize>
+          </a>
         </p>
       </div>
 
