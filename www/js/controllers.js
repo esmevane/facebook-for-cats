@@ -14,11 +14,17 @@ angular.module('starter.controllers', [])
 
 .controller('ChatsCtrl', function($scope, Chats) {
   $scope.chats = [];
+  $scope.unread = 0;
 
   Chats
     .all()
     .then(function(chats) {
+      var unread = chats.filter(function(chat) {
+        return chat.unread
+      });
+
       $scope.chats = chats;
+      $scope.unread = unread.length;
     });
 
   $scope.remove = function(chat) {
