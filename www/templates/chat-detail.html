@@ -10,5 +10,25 @@
     <p>
       {{chat.body}}
     </p>
+    <form ng-submit="sendMessage()" ng-disabled="messageReady()">
+      <div ng-if="hasError()" class="bar bar-header bar-assertive">
+        <h1 class="title">{{ form.error }}</h1>
+      </div>
+      <div class="item item-input-inset">
+        <label class="item-input-wrapper">
+          <input type='text'
+                 name='message'
+                 id='message'
+                 ng-model='form.message'
+                 style="width: 100%"
+                 placeholder='Send a response' />
+        </label>
+        <button type='submit'
+                ng-disabled="messageReady()"
+                class="button button-small button-positive">
+          Send
+        </button>
+      </div>
+    </form>
   </ion-content>
 </ion-view>

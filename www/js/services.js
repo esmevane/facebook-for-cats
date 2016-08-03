@@ -1,6 +1,6 @@
 angular.module('starter.services', [])
 
-  .factory('Chats', ['$http', function($http) {
+  .factory('Chats', ['$http', '$window', function($http, $window) {
     var baseUri = 'https://facebook-for-cats-api.herokuapp.com/chats';
     var chats = [];
     var cache = {};
@@ -52,8 +52,23 @@ angular.module('starter.services', [])
       return getChats().then(locateChat).then(getChatBody);
     }
 
+    var sendMessage = function(chatId, message) {
+      var request = {
+        method: 'POST',
+        url: 'https://facebook-for-cats-api.herokuapp.com/echoThePost',
+        data: { text: message },
+        headers: { 'catbook-apikey': "catbook123secretapikey" }
+      }
+
+      return $http(request)
+        .then(function() {
+          $window.history.back();
+        })
+    }
+
     return {
       all: getChats,
+      sendMessage: sendMessage,
       remove: function(chat) {
         return chats.splice(chats.indexOf(chat), 1);
       },

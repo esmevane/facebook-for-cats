@@ -34,12 +34,36 @@ angular.module('starter.controllers', [])
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
   $scope.chat = {};
+  $scope.form = { error: '', message: '' };
+
+  $scope.messageReady = function() {
+    var length = $scope.form.message.length;
+
+    return length < 1 || length > 100;
+  };
+
+  $scope.hasError = function() {
+    return $scope.form.error.length > 0;
+  };
+
+  $scope.sendMessage = function() {
+    Chats
+      .sendMessage($stateParams.chatId, $scope.form.message)
+      .then(function(response) {
+        $scope.form.message = '';
+      })
+      .catch(function(response) {
+        $scope.form.error = response.data.error;
+
+        setTimeout(function() { $scope.form.error = ''; }, 500)
+      });
+  };
 
   Chats
     .get($stateParams.chatId)
     .then(function(chat) {
       $scope.chat = chat;
-    })
+    });
 })
 
 .controller('PhotoCtrl', function($scope, Photos) {
